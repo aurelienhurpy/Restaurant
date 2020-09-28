@@ -1,0 +1,121 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+
+    <main class="container-fluid mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="card bg-dark text-white text-center p-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-user fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.users }} clients</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="col">
+                <div class="card bg-success text-white text-center p-3">
+                    <a class="text-white" href="{{ path('admin_books_list') }}"><div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-hotel fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.books }} réservation</h4>
+                            </div>
+                        </div>
+                    </div></a>
+                </div>
+            </div> 
+              <div class="col">
+                <div class="card bg-warning text-white text-center p-3">
+                    <a class="text-white" href="{{ path('admin_bookings_list') }}"><div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-folder fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.bookings }} commandes</h4>
+                            </div>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+              <div class="col">
+                <div class="card text-white text-center p-3 com">
+                    <a class="text-white" href="{{ path('admin_comments_list') }}"><div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fas fa-comments fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.comments }} commentaires</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success my-3 text-center align-items-center">
+                        <h4 class="alert-heading"><i class="fas fa-arrow-up"></i> Plats les + populaires</h4>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <th>Plats</th>
+                            
+                            <th>Moyenne</th>
+                        </thead>
+                        <tbody>
+                        {% for ad in bestAds %}
+                            <tr>
+                                <td>{{ ad.title }}</td>
+                                <td>
+                                   
+                                </td>
+                                <span class="badge badge-dark"><td>{{ ad.note|number_format(1,',','') }}</td></span>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            
+                <div class="col">
+                    <div class="alert alert-warning my-3 text-center align-items-center">
+                        <h4 class="alert-heading"><i class="fas fa-arrow-down"></i> Plats les - populaires</h4>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <th>Plats</th>
+                            
+                            <th>Moyenne</th>
+                        </thead>
+                        <tbody>
+                        {% for ad in worstAds %}
+                            <tr>
+                                <td>{{ ad.title }}</td>
+                                <td>
+                                    
+                                </td>
+                                <span class="badge badge-dark"><td>{{ ad.note|number_format(1,',','') }}</td></span>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        
+
+    </main>
+
+{% endblock %}

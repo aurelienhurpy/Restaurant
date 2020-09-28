@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center">Creation d'une nouvelle annonce</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    <div class="p-5 text-center">
+        <button type="submit" class="btn btn-primary">Créer</button>
+        <a href="{{ path('admin_dashboard') }}" class="btn btn-warning"><i class="fas fa-times"></i> Annuler</a>
+    </div>
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}
+
+

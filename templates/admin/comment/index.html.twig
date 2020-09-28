@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des commentaires{% endblock %}
+
+{% block body %}
+
+    <main class="container-fluid px-5">
+        <h1 class="text-center my-5">Gestion des commentaires</h1>
+        <div class="row mx-3">
+        
+            <table class="table">
+                <thead class="table-primary">
+                    <th>Id</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Client</th>
+                    <th class="text-center">commentaire</th>
+                    <th class="text-center">Note</th>
+                    <th class="text-center">Plat</th>
+                    <th class="text-center">Actions</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% for comment in pagination.data %}
+                        <tr>
+                            <td>{{ comment.id }}</td>
+                            <td class="text-center">{{ comment.createdAt|date('d/m/Y') }}</td>
+                            <td class="text-center">
+                                <img src="{{ comment.author.avatar }}" alt="{{ comment.author.fullName }}" class="avatar avatar-xs">
+                                {{ comment.author.fullName }}
+                            </td>
+                            <td class="text-center">{{ comment.content }}</td>
+                            <td class="text-center"><span class="badge badge-primary">{{ comment.ad.averageRatings|number_format(1,',','') }}</span></td>
+                            <td class="text-center">{{ comment.ad.title }}</td>
+                            <td class="text-center row">
+                                <a href="{{ path('admin_comment_edit',{'id':comment.id}) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="{{ path('admin_comment_delete',{'id':comment.id}) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    {{ pagination.display() }}        
+{% endblock %}

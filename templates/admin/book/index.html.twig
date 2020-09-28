@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des réservations{% endblock %}
+
+{% block body %}
+
+    <main class="container-fluid px-5">
+    
+        <h1 class="my-5 text-center">Gestion des réservations</h1>
+
+        <table class="table">
+        
+            <thead class="table-primary">
+                <th>Id</th>
+                <th class="text-center">Client</th>
+                <th class="text-center">Date de réservation</th>
+                <th class="text-center">Nombre de couverts</th>
+                <th class="text-center">Horaire de réservation</th>
+                <th class="text-center">Actions</th>
+                
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for book in pagination.data %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td class="text-center">{{ book.booker.fullName }}</td>
+                        <td class="text-center">{{ book.startDate|date('d/m/Y') }}</td>
+                        <td class="text-center">{{ book.guest }}</td>
+                        <td class="text-center">{{ book.time|date('H:i') }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('admin_book_edit',{'id':book.id}) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_book_delete',{'id':book.id}) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        
+        </table>
+        {{ pagination.display() }} 
+    </main>
+
+{% endblock %}
